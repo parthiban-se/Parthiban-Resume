@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Selvarasu - Senior Test Automation Engineer portfolio and CV" />
-  <title> Selvarasu | Senior Test Automation Engineer</title>
+  <meta name="description" content="Parthiban Selvarasu - Senior Test Automation Engineer (Python), team-lead ready - portfolio and CV" />
+  <title>Parthiban Selvarasu | Senior Test Automation Engineer</title>
   <style>
     :root {
       --bg: #07111f;
@@ -105,7 +105,45 @@
     .credential span { color: var(--muted); font-size: .88rem; }
     .target { display: flex; flex-direction: column; justify-content: center; background: linear-gradient(145deg, rgba(66,184,255,.12), rgba(105,240,193,.06)); }
     .target small { color: var(--secondary); text-transform: uppercase; letter-spacing: .12em; }
-    footer { text-align: center; padding: 30px 0 50px; color: var(--muted); }
+    .lead-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+      .lead-item h3 { margin: 10px 0 5px; font-size: 1rem; }
+      .lead-item p { margin: 0; color: var(--muted); font-size: .88rem; }
+      @media (max-width: 900px) { .lead-grid { grid-template-columns: repeat(2, 1fr); } }
+      @media (max-width: 620px) { .lead-grid { grid-template-columns: 1fr; } }
+      @media print { .lead-grid { grid-template-columns: repeat(3, 1fr); gap: 5px; } .lead-item p { color: #33475b; } }
+      /* ===== Animations ===== */
+      .progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 50; background: linear-gradient(90deg, var(--primary), var(--secondary)); box-shadow: 0 0 12px var(--primary); }
+      .orb { position: fixed; border-radius: 50%; filter: blur(90px); opacity: .22; pointer-events: none; z-index: -1; animation: drift 18s ease-in-out infinite alternate; }
+      .orb.a { width: 420px; height: 420px; background: var(--primary); top: -120px; left: -100px; }
+      .orb.b { width: 360px; height: 360px; background: var(--secondary); bottom: -120px; right: -80px; animation-duration: 22s; animation-delay: -6s; }
+      @keyframes drift { 0% { transform: translate(0,0) scale(1); } 50% { transform: translate(80px,60px) scale(1.12); } 100% { transform: translate(-40px,120px) scale(.95); } }
+      .gradient { background-size: 200% auto; animation: shine 7s linear infinite; }
+      @keyframes shine { to { background-position: 200% center; } }
+      .hero-in > * { opacity: 0; transform: translateY(18px); animation: rise .8s cubic-bezier(.2,.7,.2,1) forwards; }
+      .hero-in > *:nth-child(1) { animation-delay: .1s; } .hero-in > *:nth-child(2) { animation-delay: .25s; }
+      .hero-in > *:nth-child(3) { animation-delay: .4s; } .hero-in > *:nth-child(4) { animation-delay: .55s; }
+      .hero-card { opacity: 0; animation: rise 1s .5s cubic-bezier(.2,.7,.2,1) forwards; }
+      @keyframes rise { to { opacity: 1; transform: none; } }
+      .monogram { animation: float 5s ease-in-out infinite; }
+      @keyframes float { 50% { transform: translateY(-8px) rotate(-3deg); } }
+      .caret { color: var(--secondary); margin-left: 2px; animation: blink 1s steps(1) infinite; }
+      @keyframes blink { 50% { opacity: 0; } }
+      .stagger > * { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1), border-color .25s ease, box-shadow .25s ease; }
+      .reveal.show .stagger > * { opacity: 1; transform: none; }
+      .card { transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease; }
+      .skill:hover, .project:hover, .lead-item:hover { transform: translateY(-6px); border-color: rgba(66,184,255,.5); box-shadow: 0 18px 50px rgba(66,184,255,.16); }
+      .job::before { animation: pulse 2.4s ease-out infinite; }
+      @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(66,184,255,.5); } 100% { box-shadow: 0 0 0 12px rgba(66,184,255,0); } }
+      .timeline::before { transform-origin: top; transform: scaleY(0); transition: transform 1.4s ease; }
+      .reveal.show .timeline::before, .reveal.show.timeline::before { transform: scaleY(1); }
+      .featured { grid-column: span 3; border-color: rgba(105,240,193,.35); background: linear-gradient(135deg, rgba(66,184,255,.14), rgba(105,240,193,.07)), var(--surface); }
+      .tag { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #06111f; background: linear-gradient(90deg, var(--primary), var(--secondary)); padding: 3px 10px; border-radius: 999px; }
+      .chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+      .chips span { font-size: .78rem; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255,255,255,.05); color: #d9e7f4; }
+      @media (max-width: 900px) { .featured { grid-column: auto; } }
+      @media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } .stagger > *, .hero-in > *, .hero-card { opacity: 1 !important; transform: none !important; } }
+      @media print { .progress, .orb { display: none; } .stagger > *, .hero-in > *, .hero-card { opacity: 1 !important; transform: none !important; animation: none !important; } .featured { grid-column: span 3; } .chips span { color: #33475b; } }
+      footer { text-align: center; padding: 30px 0 50px; color: var(--muted); }
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
     .reveal.show { opacity: 1; transform: none; }
     @media (max-width: 900px) {
@@ -150,74 +188,96 @@
   </style>
 </head>
 <body>
+    <div class="progress" id="progress"></div><div class="orb a"></div><div class="orb b"></div>
   <nav>
     <a class="brand" href="#top">PARTHIBAN SELVARASU<span>.</span></a>
     <div class="nav-links">
-      <a href="#skills">Skills</a><a href="#experience">Experience</a><a href="#projects">Projects</a>
+      <a href="#leadership">Leadership</a><a href="#skills">Skills</a><a href="#experience">Experience</a><a href="#projects">Projects</a>
       <a class="button" href="mailto:parthiban.selvarasu@outlook.com">Contact</a>
     </div>
   </nav>
 
   <div class="shell" id="top">
     <header>
-      <div>
-        <div class="eyebrow">Automation • Validation • DevOps</div>
+        <div class="hero-in">
+        <div class="eyebrow">Python Automation • Validation • Team Leadership</div>
         <h1 class="gradient">PARTHIBAN SELVARASU</h1>
-        <p class="lead">Senior Test Automation Engineer with 8+ years of experience creating dependable Python, LabVIEW and TestStand solutions across system validation, hardware-software integration, test planning and customer delivery.</p>
+        <p class="lead">Senior Test Automation Engineer with 8+ years of experience designing, building and owning Python-based automation test suites for power, energy and embedded products. Experienced from test strategy to delivery — framework architecture, Modbus TCP / Redfish / VISA-SCPI integration, automated result comparison and Jira reporting — while guiding team members and coordinating cross-functional teams. Ready to take on a Test Automation Team Lead role.</p>
         <div class="contact-row">
           <span>📍 Chennai, Tamil Nadu</span>
           <a href="tel:+919025955202">☎ +91 90259 55202</a>
-          <a href="mailto:t.selvarasu@proton.me">✉ parthiban.selvarasu@outlook.com</a>
+          <a href="mailto:parthiban.selvarasu@outlook.com">✉ parthiban.selvarasu@outlook.com</a>
         </div>
       </div>
       <aside class="hero-card">
         <div class="monogram">PS</div>
         <h2>Senior Test<br />Automation Engineer</h2>
-        <p style="color:var(--muted)">Focused on Test Automation.</p>
+        <p style="color:var(--muted)"><span class="typed" data-words="Python Test Frameworks|PDU &amp; Device Validation|Modbus • Redfish • SCPI|Ready to Lead Teams"></span><span class="caret">|</span></p>
         <div class="metric">
-          <div><strong>8+</strong><span>Years of experience</span></div>
-          <div><strong>3</strong><span>Major employers</span></div>
+          <div><strong><span class="count" data-to="8">0</span>+</strong><span>Years of experience</span></div>
+          <div><strong><span class="count" data-to="3">0</span></strong><span>Major employers</span></div>
           <div><strong>Python</strong><span>Core automation</span></div>
-          <div><strong>CI/CD</strong><span>Delivery focus</span></div>
+          <div><strong>Lead-ready</strong><span>Mentoring &amp; delivery ownership</span></div>
         </div>
       </aside>
     </header>
 
     <main>
-      <section id="skills" class="reveal">
-        <div class="section-title"><h2>Core expertise</h2><p>Technologies and delivery capabilities</p></div>
-        <div class="skills">
-          <article class="card skill"><div class="skill-icon">⚙</div><h3>Test Automation</h3><p>Python, LabVIEW, TestStand, reusable test architecture and automated execution.</p></article>
-          <article class="card skill"><div class="skill-icon">∞</div><h3>DevOps</h3><p>DevOps, Git, Shell scripting, triggers and test integration.</p></article>
-          <article class="card skill"><div class="skill-icon">✓</div><h3>Quality Engineering</h3><p>Functional, system, integration and regression testing with failure triage.</p></article>
-          <article class="card skill"><div class="skill-icon">⌨</div><h3>Languages</h3><p>Python, C#, C++, SQL and GUI development with PyQt.</p></article>
-          <article class="card skill"><div class="skill-icon">↔</div><h3>Interfaces</h3><p>CAN, MODBUS, TCP/IP, UDP, RS232, RS485, GPIB and USB HID.</p></article>
-          <article class="card skill"><div class="skill-icon">◉</div><h3>Instrumentation</h3><p>NI DAQ, AC/DC sources, electronic loads, oscilloscopes and source meters.</p></article>
-          <article class="card skill"><div class="skill-icon">◇</div><h3>Technical Delivery</h3><p>Client communication, mentoring, planning, issue resolution and ownership.</p></article>
+      <section id="leadership" class="reveal">
+        <div class="section-title"><h2>Leadership readiness</h2><p>Ownership, guidance and delivery</p></div>
+        <div class="lead-grid stagger">
+          <article class="card lead-item"><div class="skill-icon">★</div><h3>Technical Leadership</h3><p>Technical leadership, decision-making and test-planning support for system validation programs at Schneider Electric.</p></article>
+          <article class="card lead-item"><div class="skill-icon">👥</div><h3>Team Guidance</h3><p>Led team members in adapting Python test scripts for new semiconductor products (post-silicon validation, Silana – US).</p></article>
+          <article class="card lead-item"><div class="skill-icon">⏱</div><h3>Delivery Ownership</h3><p>Owned customer automation projects end to end — objectives, timelines, schedules and on-site issue resolution.</p></article>
+          <article class="card lead-item"><div class="skill-icon">⚙</div><h3>Framework &amp; Tooling</h3><p>Architect reusable, configurable Python test suites and internal productivity tools the wider team can run.</p></article>
+          <article class="card lead-item"><div class="skill-icon">✉</div><h3>Stakeholder Communication</h3><p>Mentor engineers, triage failures and keep test status current in Jira for engineering and management tracking.</p></article>
+          <article class="card lead-item"><div class="skill-icon">✓</div><h3>Quality Strategy</h3><p>Plan regression, integration and system test coverage from product features and use cases.</p></article>
         </div>
       </section>
+      <section id="skills" class="reveal">
+        <div class="section-title"><h2>Core expertise</h2><p>Technologies and delivery capabilities</p></div>
+        <div class="skills stagger">
+            <article class="card skill"><div class="skill-icon">⚙</div><h3>Python Automation</h3><p>Modular test-suite architecture, reusable driver/config layers, multi-threading and multi-processing.</p></article>
+            <article class="card skill"><div class="skill-icon">⇄</div><h3>Device &amp; API Testing</h3><p>Modbus TCP register validation, Redfish/REST API crawling, Playwright and Selenium web automation.</p></article>
+            <article class="card skill"><div class="skill-icon">◉</div><h3>Instrumentation</h3><p>VISA/SCPI electronic loads, Yokogawa WT230 power meter, AC/DC sources, oscilloscopes, NI DAQ, source meters.</p></article>
+            <article class="card skill"><div class="skill-icon">▦</div><h3>Test UI &amp; Reporting</h3><p>NiceGUI, Streamlit and PyQt dashboards with tolerance-based PASS/FAIL results and reports.</p></article>
+            <article class="card skill"><div class="skill-icon">✓</div><h3>Quality Engineering</h3><p>System, integration, regression, functional, HIL/SIL; IEEE 1547, CA Rule 21 and PREPA compliance.</p></article>
+            <article class="card skill"><div class="skill-icon">↔</div><h3>Interfaces</h3><p>MODBUS, CAN, TCP/IP, UDP, RS232, RS485, GPIB, USB HID, ECP-e and SMTP.</p></article>
+            <article class="card skill"><div class="skill-icon">∞</div><h3>Tools &amp; DevOps</h3><p>Git, Jira, Azure DevOps YAML, Shell scripting, Power Automate and Wireshark.</p></article>
+            <article class="card skill"><div class="skill-icon">⌨</div><h3>Also Proficient In</h3><p>LabVIEW, NI TestStand, C#, C++, SQL; Agile / SDLC; Windows and Linux.</p></article>
+          </div>
+        </section>
 
       <section id="experience" class="reveal">
         <div class="section-title"><h2>Professional experience</h2><p>Automation, validation and project delivery</p></div>
-        <div class="card timeline">
+        <div class="card timeline stagger">
           <article class="job">
-            <div class="job-head"><div><h3>Senior Automation Test Engineer</h3><div class="company">SCHNIDER ELECTRIC</div></div><span class="date">Oct 2022 – Present</span></div>
+            <div class="job-head"><div><h3>Senior Automation Test Engineer</h3><div class="company">SCHNEIDER ELECTRIC</div></div><span class="date">Oct 2022 – Present</span></div>
             <ul>
+              <li><strong>All-in-one Rack PDU Test Suite (Python + NiceGUI):</strong> architected a single suite that automates complete PDU validation —
+                <ul>
+                  <li>Modbus TCP register verification against the register map;</li>
+                  <li>Redfish validation with a recursive @odata.id crawler that tolerates malformed JSON and saves per-model URL configurations;</li>
+                  <li>Playwright auto-login and data capture across 10+ device web pages;</li>
+                  <li>VISA/SCPI control of multiple programmable electronic loads and Yokogawa WT230 power-meter readings;</li>
+                  <li>cross-comparison of voltage, current, power and energy with configurable tolerances, live status dashboards and PASS/FAIL reports.</li>
+                </ul></li>
               <li>Develop and execute automated system test plans for hybrid inverters, backup controllers, battery management systems and energy monitoring products using Python and programmable lab equipment.</li>
               <li>Validate grid-tie and grid-forming control modes and verify compliance with IEEE 1547, CA Rule 21 and PREPA requirements.</li>
-              <li>Own regression, integration and system testing, investigate failures and improve automation reliability and execution efficiency.</li>
-              <li>Provide technical leadership, planning support and clear status communication to engineering stakeholders.</li>
+              <li>Own regression, integration and system testing, triage failures with cross-functional teams and maintain Jira for stakeholder and management tracking.</li>
+              <li>Built internal team tools — a Streamlit/SQLite competency management app with role-based access and automated email notifications, and a timesheet consolidation utility.</li>
             </ul>
           </article>
           <article class="job">
             <div class="job-head"><div><h3>Design Engineer 2</h3><div class="company">TESSOLVE SEMICONDUCTOR</div></div><span class="date">Mar 2021 – Oct 2022</span></div>
             <ul>
+              <li>Led team members in modifying Python test scripts for new products in post-silicon validation for a US semiconductor client.</li>
               <li>Designed, developed, debugged and maintained automated test and data-acquisition software using LabVIEW, Python, C++, C# and instrumentation interfaces.</li>
               <li>Partnered with systems engineers, reviewed software modules and resolved test-system issues at customer sites.</li>
             </ul>
           </article>
           <article class="job">
-            <div class="job-head"><div><h3>Project Engineer</h3><div class="company">Nive System</div></div><span class="date">Jun 2018 – Feb 2021</span></div>
+            <div class="job-head"><div><h3>Project Engineer</h3><div class="company">Nive Systems</div></div><span class="date">Jun 2018 – Feb 2021</span></div>
             <ul><li>Delivered customer automation projects covering GUI development, data acquisition, hardware integration, debugging and schedule ownership using LabVIEW and Python.</li></ul>
           </article>
         </div>
@@ -229,10 +289,16 @@
 		<p>Representative automation work</p>
 	  </div>
 
-	  <div class="projects">
+	  <div class="projects stagger">
+		<article class="card project featured">
+		  <span class="tag">Latest • Flagship</span>
+		  <h3>All-in-One Rack PDU Test Suite</h3>
+		  <p>One Python + NiceGUI suite covering the full PDU validation flow: Modbus TCP register checks, Redfish resource-tree crawling, Playwright web-page verification (10+ pages), electronic-load control over VISA/SCPI and WT230 power-meter comparison — with tolerance-based PASS/FAIL, live dashboards and reports.</p>
+		  <div class="chips"><span>Python</span><span>NiceGUI</span><span>Modbus TCP</span><span>Redfish</span><span>Playwright</span><span>VISA/SCPI</span><span>WT230</span></div>
+		</article>
 		<article class="card project">
 		  <h3>Hybrid Energy Systems Automation</h3>
-		  <p>Developed Python and Maestro-based automation for system and mobile application testing of hybrid inverters, backup controllers, battery systems, and energy monitors, including grid-control and regulatory compliance validation.</p>
+		  <p>Developed Python-based automation for system testing of hybrid inverters, backup controllers, battery systems, and energy monitors, including grid-control and regulatory compliance validation.</p>
 		</article>
 
 		<article class="card project">
@@ -286,7 +352,7 @@
         </div>
       </section>
     </main>
-    <footer>© <span id="year"></span> • Parthiban's Resume</footer>
+    <footer>© <span id="year"></span> • Parthiban Selvarasu • Senior Test Automation Engineer</footer>
   </div>
 
   <script>
@@ -295,6 +361,21 @@
       if (entry.isIntersecting) entry.target.classList.add('show');
     }), { threshold: 0.08 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    // stagger delays
+    document.querySelectorAll('.stagger').forEach(g => [...g.children].forEach((c,i) => c.style.transitionDelay = (i*90)+'ms'));
+    // scroll progress
+    const bar = document.getElementById('progress');
+    addEventListener('scroll', () => { const h = document.documentElement; bar.style.width = (h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'; }, {passive:true});
+    // counters
+    document.querySelectorAll('.count').forEach(el => { const to=+el.dataset.to; let n=0; const t=setInterval(()=>{ el.textContent=++n; if(n>=to) clearInterval(t); }, 1100/to); });
+    // typing effect
+    const ty=document.querySelector('.typed');
+    if (ty) { const words=ty.dataset.words.split('|'); let w=0,i=0,del=false;
+      (function tick(){ const word=words[w]; ty.textContent=word.slice(0,i);
+        if(!del && i<word.length){ i++; setTimeout(tick,70); }
+        else if(!del){ del=true; setTimeout(tick,1600); }
+        else if(i>0){ i--; setTimeout(tick,35); }
+        else { del=false; w=(w+1)%words.length; setTimeout(tick,300); } })(); }
   </script>
 </body>
 </html>
