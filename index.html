@@ -3,379 +3,327 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Parthiban Selvarasu - Senior Test Automation Engineer (Python), team-lead ready - portfolio and CV" />
+  <meta name="description" content="Parthiban Selvarasu - Senior Test Automation Engineer (Python), team-lead ready" />
   <title>Parthiban Selvarasu | Senior Test Automation Engineer</title>
   <style>
     :root {
-      --bg: #07111f;
-      --surface: rgba(13, 29, 49, 0.82);
-      --surface-2: rgba(21, 43, 69, 0.76);
-      --text: #eaf2fb;
-      --muted: #9cb0c7;
-      --primary: #42b8ff;
-      --secondary: #69f0c1;
-      --line: rgba(151, 190, 224, 0.18);
-      --shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
-      --radius: 22px;
+      --bg: #0b1622; --surface: #132232; --surface2: #182b3f; --line: rgba(255,255,255,.09);
+      --text: #e9f1f8; --muted: #9fb3c7; --primary: #42b8ff; --secondary: #69f0c1;
     }
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      color: var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at 15% 10%, rgba(66,184,255,.17), transparent 30%),
-        radial-gradient(circle at 88% 18%, rgba(105,240,193,.12), transparent 28%),
-        linear-gradient(140deg, #050b14 0%, #091727 52%, #06111f 100%);
-      min-height: 100vh;
-      line-height: 1.65;
-    }
-    body::before {
-      content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .3;
-      background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-      background-size: 42px 42px;
-      mask-image: linear-gradient(to bottom, black, transparent 85%);
-    }
+    body { font-family: "Segoe UI", Inter, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
     a { color: inherit; text-decoration: none; }
-    .shell { width: min(1180px, calc(100% - 36px)); margin: 0 auto; }
-    nav {
-      position: sticky; top: 14px; z-index: 20; margin: 14px auto 0;
-      width: min(1180px, calc(100% - 36px));
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 12px 16px; border: 1px solid var(--line); border-radius: 16px;
-      background: rgba(5, 14, 25, .72); backdrop-filter: blur(18px); box-shadow: 0 12px 40px rgba(0,0,0,.24);
-    }
-    .brand { font-weight: 800; letter-spacing: .05em; }
+    .wrap { width: min(1120px, 92%); margin: 0 auto; }
+
+    /* ---------- Background & progress ---------- */
+    .progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 100; background: linear-gradient(90deg, var(--primary), var(--secondary)); box-shadow: 0 0 12px var(--primary); }
+    .orb { position: fixed; border-radius: 50%; filter: blur(90px); opacity: .22; pointer-events: none; z-index: -1; animation: drift 18s ease-in-out infinite alternate; }
+    .orb.a { width: 420px; height: 420px; background: var(--primary); top: -120px; left: -100px; }
+    .orb.b { width: 360px; height: 360px; background: var(--secondary); bottom: -120px; right: -80px; animation-duration: 22s; animation-delay: -6s; }
+    @keyframes drift { 0% { transform: translate(0,0) scale(1); } 50% { transform: translate(80px,60px) scale(1.12); } 100% { transform: translate(-40px,120px) scale(.95); } }
+
+    /* ---------- Nav ---------- */
+    nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(12px); background: rgba(11,22,34,.75); border-bottom: 1px solid var(--line); }
+    nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 62px; }
+    .brand { font-weight: 800; letter-spacing: .08em; }
     .brand span { color: var(--primary); }
-    .nav-links { display: flex; gap: 8px; align-items: center; }
-    .nav-links a { color: var(--muted); padding: 8px 10px; border-radius: 9px; font-size: .9rem; }
-    .nav-links a:hover { color: white; background: rgba(255,255,255,.06); }
-    .button { border: 1px solid rgba(66,184,255,.35); background: linear-gradient(135deg, rgba(66,184,255,.22), rgba(105,240,193,.11)); color: white !important; }
-    header { padding: 92px 0 48px; display: grid; grid-template-columns: 1.35fr .65fr; gap: 34px; align-items: center; }
-    .eyebrow { display: inline-flex; gap: 8px; align-items: center; color: var(--secondary); font-weight: 700; text-transform: uppercase; letter-spacing: .13em; font-size: .76rem; }
-    .eyebrow::before { content: ""; width: 26px; height: 2px; background: var(--secondary); }
-    h1 { margin: 14px 0 10px; font-size: clamp(2.6rem, 7vw, 5.6rem); line-height: .98; letter-spacing: -.055em; }
-    .gradient { color: transparent; background: linear-gradient(100deg, #fff 15%, var(--primary) 58%, var(--secondary)); background-clip: text; }
-    .lead { max-width: 760px; color: #bed0e2; font-size: clamp(1rem, 1.8vw, 1.2rem); }
-    .contact-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
-    .contact-row a, .contact-row span { border: 1px solid var(--line); background: rgba(255,255,255,.035); padding: 9px 13px; border-radius: 999px; color: #d9e7f4; font-size: .9rem; }
-    .hero-card, .card { border: 1px solid var(--line); background: linear-gradient(145deg, var(--surface), rgba(8,20,35,.88)); backdrop-filter: blur(16px); box-shadow: var(--shadow); }
-    .hero-card { border-radius: 28px; padding: 26px; position: relative; overflow: hidden; }
-    .hero-card::after { content: ""; position: absolute; inset: auto -40px -70px auto; width: 180px; height: 180px; border-radius: 50%; background: var(--primary); filter: blur(80px); opacity: .18; }
-    .monogram { width: 86px; height: 86px; border-radius: 24px; display: grid; place-items: center; font-size: 2rem; font-weight: 900; color: #06111f; background: linear-gradient(135deg, var(--primary), var(--secondary)); box-shadow: 0 10px 34px rgba(66,184,255,.25); }
-    .metric { margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .metric div { padding: 14px; border-radius: 15px; background: rgba(255,255,255,.045); border: 1px solid var(--line); }
-    .metric strong { display: block; font-size: 1.45rem; color: white; }
-    .metric span { color: var(--muted); font-size: .78rem; }
-    main { padding-bottom: 70px; }
-    section { margin: 28px 0; }
-    .section-title { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 16px; }
-    .section-title h2 { margin: 0; font-size: clamp(1.55rem, 3vw, 2.3rem); letter-spacing: -.03em; }
-    .section-title p { color: var(--muted); margin: 0; }
-    .card { border-radius: var(--radius); padding: clamp(20px, 3vw, 30px); }
-    .skills { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-    .skill { min-height: 140px; transition: transform .25s ease, border-color .25s ease; }
-    .skill:hover { transform: translateY(-5px); border-color: rgba(66,184,255,.45); }
-    .skill-icon { font-size: 1.35rem; }
-    .skill h3 { margin: 12px 0 5px; font-size: 1rem; }
-    .skill p { margin: 0; color: var(--muted); font-size: .88rem; }
-    .timeline { position: relative; margin-left: 9px; padding-left: 31px; }
-    .timeline::before { content: ""; position: absolute; left: 3px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(var(--primary), var(--secondary)); }
-    .job { position: relative; padding: 4px 0 27px; }
-    .job:last-child { padding-bottom: 0; }
-    .job::before { content: ""; position: absolute; left: -34px; top: 10px; width: 10px; height: 10px; border-radius: 50%; background: var(--primary); box-shadow: 0 0 0 6px rgba(66,184,255,.12); }
-    .job-head { display: flex; justify-content: space-between; align-items: start; gap: 18px; }
+    .links { display: flex; gap: 22px; align-items: center; font-size: .92rem; color: var(--muted); }
+    .links a { position: relative; transition: color .25s; }
+    .links a::after { content: ""; position: absolute; left: 0; bottom: -4px; width: 0; height: 2px; background: var(--primary); transition: width .3s; }
+    .links a:hover { color: var(--text); }
+    .links a:hover::after { width: 100%; }
+    .btn { padding: 8px 16px; border-radius: 999px; background: linear-gradient(90deg, var(--primary), var(--secondary)); color: #06111f !important; font-weight: 700; }
+    .btn::after { display: none; }
+
+    /* ---------- Hero ---------- */
+    header { padding: 80px 0 50px; }
+    .hero { display: grid; grid-template-columns: 1.35fr 1fr; gap: 40px; align-items: center; }
+    .eyebrow { color: var(--secondary); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; font-size: .8rem; }
+    h1 { font-size: clamp(2.3rem, 5vw, 3.8rem); line-height: 1.1; margin: 12px 0 18px; }
+    .gradient { background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary)); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shine 7s linear infinite; }
+    @keyframes shine { to { background-position: 200% center; } }
+    .lead { color: var(--muted); font-size: 1.05rem; max-width: 640px; }
+    .contact { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+    .contact a, .contact span { padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.04); font-size: .9rem; transition: border-color .25s, transform .25s; }
+    .contact a:hover { border-color: var(--primary); transform: translateY(-2px); }
+
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 22px; transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease; }
+    .hero-card { text-align: center; padding: 30px; background: linear-gradient(160deg, var(--surface2), var(--surface)); }
+    .monogram { width: 92px; height: 92px; margin: 0 auto 14px; border-radius: 24px; display: grid; place-items: center; font-size: 2rem; font-weight: 800; color: #06111f; background: linear-gradient(135deg, var(--primary), var(--secondary)); box-shadow: 0 14px 40px rgba(66,184,255,.35); animation: float 5s ease-in-out infinite; }
+    @keyframes float { 50% { transform: translateY(-8px) rotate(-3deg); } }
+    .hero-card h2 { font-size: 1.35rem; line-height: 1.25; }
+    .typed-line { min-height: 1.6em; margin: 8px 0 18px; color: var(--primary); font-weight: 600; }
+    .caret { color: var(--secondary); margin-left: 2px; animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; text-align: left; }
+    .metric { padding: 14px; border-radius: 14px; background: rgba(255,255,255,.04); border: 1px solid var(--line); }
+    .metric strong { display: block; font-size: 1.6rem; line-height: 1.2; color: var(--text); }
+    .metric small { color: var(--muted); font-size: .78rem; }
+
+    /* ---------- Sections ---------- */
+    section { padding: 50px 0; }
+    .section-title { display: flex; justify-content: space-between; align-items: end; gap: 10px; margin-bottom: 22px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+    .section-title h2 { font-size: 1.7rem; }
+    .section-title p { color: var(--muted); font-size: .9rem; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .icon { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; font-size: 1.2rem; background: rgba(66,184,255,.12); color: var(--primary); }
+    .card h3 { margin: 10px 0 6px; font-size: 1.02rem; }
+    .card p { color: var(--muted); font-size: .9rem; }
+    .hover:hover { transform: translateY(-6px); border-color: rgba(66,184,255,.5); box-shadow: 0 18px 50px rgba(66,184,255,.16); }
+
+    /* ---------- Timeline ---------- */
+    .timeline { position: relative; padding-left: 34px; }
+    .timeline::before { content: ""; position: absolute; left: 10px; top: 6px; bottom: 6px; width: 2px; background: linear-gradient(var(--primary), var(--secondary)); transform-origin: top; transform: scaleY(0); transition: transform 1.4s ease; }
+    .timeline.show::before { transform: scaleY(1); }
+    .job { position: relative; margin-bottom: 28px; }
+    .job:last-child { margin-bottom: 0; }
+    .job::before { content: ""; position: absolute; left: -30px; top: 8px; width: 12px; height: 12px; border-radius: 50%; background: var(--primary); animation: pulse 2.4s ease-out infinite; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(66,184,255,.55); } 100% { box-shadow: 0 0 0 12px rgba(66,184,255,0); } }
+    .job-head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; }
     .job h3 { margin: 0; font-size: 1.15rem; }
-    .company { color: var(--primary); font-weight: 700; }
-    .date { color: var(--muted); font-size: .86rem; white-space: nowrap; }
-    ul { margin: 11px 0 0; padding-left: 18px; }
-    li { color: #c5d5e5; margin: 5px 0; }
-    li::marker { color: var(--secondary); }
-    .projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-    .project { position: relative; overflow: hidden; }
-    .project::before { content: ""; position: absolute; left: 0; top: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--primary), var(--secondary)); }
-    .project h3 { margin: 3px 0 8px; }
-    .project p { color: var(--muted); margin: 0; }
-    .bottom-grid { display: grid; grid-template-columns: 1.45fr .55fr; gap: 14px; }
-    .credential { display: flex; gap: 14px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); }
-    .credential:last-child { border: 0; padding-bottom: 0; }
-    .badge { width: 46px; height: 46px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 13px; background: rgba(66,184,255,.12); color: var(--primary); font-weight: 900; }
-    .credential strong { display: block; }
-    .credential span { color: var(--muted); font-size: .88rem; }
-    .target { display: flex; flex-direction: column; justify-content: center; background: linear-gradient(145deg, rgba(66,184,255,.12), rgba(105,240,193,.06)); }
-    .target small { color: var(--secondary); text-transform: uppercase; letter-spacing: .12em; }
-    .lead-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-      .lead-item h3 { margin: 10px 0 5px; font-size: 1rem; }
-      .lead-item p { margin: 0; color: var(--muted); font-size: .88rem; }
-      @media (max-width: 900px) { .lead-grid { grid-template-columns: repeat(2, 1fr); } }
-      @media (max-width: 620px) { .lead-grid { grid-template-columns: 1fr; } }
-      @media print { .lead-grid { grid-template-columns: repeat(3, 1fr); gap: 5px; } .lead-item p { color: #33475b; } }
-      /* ===== Animations ===== */
-      .progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 50; background: linear-gradient(90deg, var(--primary), var(--secondary)); box-shadow: 0 0 12px var(--primary); }
-      .orb { position: fixed; border-radius: 50%; filter: blur(90px); opacity: .22; pointer-events: none; z-index: -1; animation: drift 18s ease-in-out infinite alternate; }
-      .orb.a { width: 420px; height: 420px; background: var(--primary); top: -120px; left: -100px; }
-      .orb.b { width: 360px; height: 360px; background: var(--secondary); bottom: -120px; right: -80px; animation-duration: 22s; animation-delay: -6s; }
-      @keyframes drift { 0% { transform: translate(0,0) scale(1); } 50% { transform: translate(80px,60px) scale(1.12); } 100% { transform: translate(-40px,120px) scale(.95); } }
-      .gradient { background-size: 200% auto; animation: shine 7s linear infinite; }
-      @keyframes shine { to { background-position: 200% center; } }
-      .hero-in > * { opacity: 0; transform: translateY(18px); animation: rise .8s cubic-bezier(.2,.7,.2,1) forwards; }
-      .hero-in > *:nth-child(1) { animation-delay: .1s; } .hero-in > *:nth-child(2) { animation-delay: .25s; }
-      .hero-in > *:nth-child(3) { animation-delay: .4s; } .hero-in > *:nth-child(4) { animation-delay: .55s; }
-      .hero-card { opacity: 0; animation: rise 1s .5s cubic-bezier(.2,.7,.2,1) forwards; }
-      @keyframes rise { to { opacity: 1; transform: none; } }
-      .monogram { animation: float 5s ease-in-out infinite; }
-      @keyframes float { 50% { transform: translateY(-8px) rotate(-3deg); } }
-      .caret { color: var(--secondary); margin-left: 2px; animation: blink 1s steps(1) infinite; }
-      @keyframes blink { 50% { opacity: 0; } }
-      .stagger > * { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1), border-color .25s ease, box-shadow .25s ease; }
-      .reveal.show .stagger > * { opacity: 1; transform: none; }
-      .card { transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease; }
-      .skill:hover, .project:hover, .lead-item:hover { transform: translateY(-6px); border-color: rgba(66,184,255,.5); box-shadow: 0 18px 50px rgba(66,184,255,.16); }
-      .job::before { animation: pulse 2.4s ease-out infinite; }
-      @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(66,184,255,.5); } 100% { box-shadow: 0 0 0 12px rgba(66,184,255,0); } }
-      .timeline::before { transform-origin: top; transform: scaleY(0); transition: transform 1.4s ease; }
-      .reveal.show .timeline::before, .reveal.show.timeline::before { transform: scaleY(1); }
-      .featured { grid-column: span 3; border-color: rgba(105,240,193,.35); background: linear-gradient(135deg, rgba(66,184,255,.14), rgba(105,240,193,.07)), var(--surface); }
-      .tag { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #06111f; background: linear-gradient(90deg, var(--primary), var(--secondary)); padding: 3px 10px; border-radius: 999px; }
-      .chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
-      .chips span { font-size: .78rem; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255,255,255,.05); color: #d9e7f4; }
-      @media (max-width: 900px) { .featured { grid-column: auto; } }
-      @media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } .stagger > *, .hero-in > *, .hero-card { opacity: 1 !important; transform: none !important; } }
-      @media print { .progress, .orb { display: none; } .stagger > *, .hero-in > *, .hero-card { opacity: 1 !important; transform: none !important; animation: none !important; } .featured { grid-column: span 3; } .chips span { color: #33475b; } }
-      footer { text-align: center; padding: 30px 0 50px; color: var(--muted); }
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
-    .reveal.show { opacity: 1; transform: none; }
+    .company { color: var(--secondary); font-weight: 700; letter-spacing: .06em; font-size: .85rem; }
+    .date { color: var(--muted); font-size: .85rem; font-style: italic; }
+    .job ul { margin: 10px 0 0 18px; color: #cfdceb; font-size: .93rem; }
+    .job li { margin-bottom: 6px; }
+    .job ul ul { margin-top: 6px; color: var(--muted); }
+
+    /* ---------- Projects ---------- */
+    .featured { grid-column: span 3; border-color: rgba(105,240,193,.35); background: linear-gradient(135deg, rgba(66,184,255,.14), rgba(105,240,193,.07)), var(--surface); }
+    .tag { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #06111f; background: linear-gradient(90deg, var(--primary), var(--secondary)); padding: 3px 10px; border-radius: 999px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+    .chips span { font-size: .78rem; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255,255,255,.05); color: #d9e7f4; }
+    .edu { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .edu .card { display: flex; gap: 14px; align-items: center; }
+    .badge { min-width: 56px; height: 56px; border-radius: 14px; display: grid; place-items: center; font-weight: 800; color: #06111f; background: linear-gradient(135deg, var(--primary), var(--secondary)); }
+    footer { text-align: center; padding: 30px 0 50px; color: var(--muted); font-size: .88rem; }
+
+    /* ---------- Scroll animations (only when JS runs) ---------- */
+    .js .reveal { opacity: 0; transform: translateY(30px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
+    .js .reveal.show { opacity: 1; transform: none; }
+    .js .stagger > * { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1), border-color .3s, box-shadow .3s; }
+    .js .stagger.show > * { opacity: 1; transform: none; }
+    .js .stagger.show > .hover:hover { transform: translateY(-6px); }
+    .hero-in > * { opacity: 0; transform: translateY(18px); animation: rise .8s cubic-bezier(.2,.7,.2,1) forwards; }
+    .hero-in > *:nth-child(2) { animation-delay: .15s; } .hero-in > *:nth-child(3) { animation-delay: .3s; } .hero-in > *:nth-child(4) { animation-delay: .45s; }
+    .hero-card { opacity: 0; animation: rise 1s .5s cubic-bezier(.2,.7,.2,1) forwards; }
+    @keyframes rise { to { opacity: 1; transform: none; } }
+
+    /* ---------- Responsive ---------- */
     @media (max-width: 900px) {
-      header, .bottom-grid { grid-template-columns: 1fr; }
-      .skills { grid-template-columns: repeat(2, 1fr); }
-      .projects { grid-template-columns: 1fr; }
-      .hero-card { max-width: 520px; }
+      .hero { grid-template-columns: 1fr; }
+      .grid3, .grid4 { grid-template-columns: repeat(2, 1fr); }
+      .featured { grid-column: span 2; }
+      .links a:not(.btn) { display: none; }
     }
-    @media (max-width: 620px) {
-      nav { top: 7px; }
-      .nav-links a:not(.button) { display: none; }
-      header { padding-top: 58px; }
-      .skills { grid-template-columns: 1fr; }
-      .job-head { display: block; }
-      .date { display: block; margin-top: 2px; }
-      .contact-row { flex-direction: column; }
-      .contact-row a, .contact-row span { border-radius: 12px; }
+    @media (max-width: 600px) { .grid3, .grid4, .edu { grid-template-columns: 1fr; } .featured { grid-column: auto; } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before { animation: none !important; transition: none !important; }
+      .reveal, .stagger > *, .hero-in > *, .hero-card { opacity: 1 !important; transform: none !important; }
     }
     @media print {
-      :root { --text: #122033; --muted: #516173; --line: #d9e2ec; }
-      body { background: white; color: #122033; font-size: 10px; }
-      body::before, nav, .hero-card { display: none; }
-      .shell { width: 100%; }
-      header { display: block; padding: 12px 0 8px; }
-      h1 { font-size: 30px; color: #193757; background: none; -webkit-text-fill-color: initial; }
-      .lead { color: #33475b; font-size: 10px; }
-      .contact-row { margin-top: 8px; }
-      .contact-row a, .contact-row span { padding: 2px 7px; color: #33475b; }
-      section { margin: 8px 0; break-inside: avoid; }
-      .card { background: white; box-shadow: none; padding: 10px; border-radius: 8px; }
-      .section-title { margin-bottom: 5px; }
-      .section-title h2 { font-size: 15px; color: #193757; }
-      .section-title p, footer, .eyebrow { display: none; }
-      .skills { grid-template-columns: repeat(4, 1fr); gap: 5px; }
-      .skill { min-height: auto; }
-      .skill p, li, .project p { color: #33475b; }
-      .projects { grid-template-columns: repeat(3, 1fr); gap: 5px; }
-      .bottom-grid { grid-template-columns: 1.4fr .6fr; gap: 5px; }
-      .reveal { opacity: 1; transform: none; }
-      main { padding-bottom: 0; }
+      body { background: #fff; color: #111; }
+      nav, .progress, .orb { display: none; }
+      .card { background: #fff; border-color: #ccd; }
+      .card p, .job ul, .lead { color: #333; }
+      .reveal, .stagger > *, .hero-in > *, .hero-card { opacity: 1 !important; transform: none !important; animation: none !important; }
     }
   </style>
 </head>
 <body>
-    <div class="progress" id="progress"></div><div class="orb a"></div><div class="orb b"></div>
+  <div class="progress" id="progress"></div>
+  <div class="orb a"></div><div class="orb b"></div>
+
   <nav>
-    <a class="brand" href="#top">PARTHIBAN SELVARASU<span>.</span></a>
-    <div class="nav-links">
-      <a href="#leadership">Leadership</a><a href="#skills">Skills</a><a href="#experience">Experience</a><a href="#projects">Projects</a>
-      <a class="button" href="mailto:parthiban.selvarasu@outlook.com">Contact</a>
+    <div class="wrap">
+      <a href="#top" class="brand">PARTHIBAN <span>SELVARASU</span></a>
+      <div class="links">
+        <a href="#leadership">Leadership</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="mailto:parthiban.selvarasu@outlook.com" class="btn">Contact</a>
+      </div>
     </div>
   </nav>
 
-  <div class="shell" id="top">
-    <header>
-        <div class="hero-in">
+  <header id="top">
+    <div class="wrap hero">
+      <div class="hero-in">
         <div class="eyebrow">Python Automation • Validation • Team Leadership</div>
-        <h1 class="gradient">PARTHIBAN SELVARASU</h1>
+        <h1><span class="gradient">PARTHIBAN SELVARASU</span></h1>
         <p class="lead">Senior Test Automation Engineer with 8+ years of experience designing, building and owning Python-based automation test suites for power, energy and embedded products. Experienced from test strategy to delivery — framework architecture, Modbus TCP / Redfish / VISA-SCPI integration, automated result comparison and Jira reporting — while guiding team members and coordinating cross-functional teams. Ready to take on a Test Automation Team Lead role.</p>
-        <div class="contact-row">
+        <div class="contact">
           <span>📍 Chennai, Tamil Nadu</span>
           <a href="tel:+919025955202">☎ +91 90259 55202</a>
           <a href="mailto:parthiban.selvarasu@outlook.com">✉ parthiban.selvarasu@outlook.com</a>
         </div>
       </div>
-      <aside class="hero-card">
+
+      <div class="card hero-card">
         <div class="monogram">PS</div>
         <h2>Senior Test<br />Automation Engineer</h2>
-        <p style="color:var(--muted)"><span class="typed" data-words="Python Test Frameworks|PDU &amp; Device Validation|Modbus • Redfish • SCPI|Ready to Lead Teams"></span><span class="caret">|</span></p>
-        <div class="metric">
-          <div><strong><span class="count" data-to="8">0</span>+</strong><span>Years of experience</span></div>
-          <div><strong><span class="count" data-to="3">0</span></strong><span>Major employers</span></div>
-          <div><strong>Python</strong><span>Core automation</span></div>
-          <div><strong>Lead-ready</strong><span>Mentoring &amp; delivery ownership</span></div>
+        <div class="typed-line"><span class="typed" data-words="Python Test Frameworks|PDU &amp; Device Validation|Modbus • Redfish • SCPI|Ready to Lead Teams"></span><span class="caret">|</span></div>
+        <div class="metrics">
+          <div class="metric"><strong><span class="count" data-to="8">8</span>+</strong><small>Years of experience</small></div>
+          <div class="metric"><strong><span class="count" data-to="3">3</span></strong><small>Major employers</small></div>
+          <div class="metric"><strong>Python</strong><small>Core automation</small></div>
+          <div class="metric"><strong>Lead-ready</strong><small>Mentoring &amp; delivery ownership</small></div>
         </div>
-      </aside>
-    </header>
+      </div>
+    </div>
+  </header>
 
-    <main>
-      <section id="leadership" class="reveal">
-        <div class="section-title"><h2>Leadership readiness</h2><p>Ownership, guidance and delivery</p></div>
-        <div class="lead-grid stagger">
-          <article class="card lead-item"><div class="skill-icon">★</div><h3>Technical Leadership</h3><p>Technical leadership, decision-making and test-planning support for system validation programs at Schneider Electric.</p></article>
-          <article class="card lead-item"><div class="skill-icon">👥</div><h3>Team Guidance</h3><p>Led team members in adapting Python test scripts for new semiconductor products (post-silicon validation, Silana – US).</p></article>
-          <article class="card lead-item"><div class="skill-icon">⏱</div><h3>Delivery Ownership</h3><p>Owned customer automation projects end to end — objectives, timelines, schedules and on-site issue resolution.</p></article>
-          <article class="card lead-item"><div class="skill-icon">⚙</div><h3>Framework &amp; Tooling</h3><p>Architect reusable, configurable Python test suites and internal productivity tools the wider team can run.</p></article>
-          <article class="card lead-item"><div class="skill-icon">✉</div><h3>Stakeholder Communication</h3><p>Mentor engineers, triage failures and keep test status current in Jira for engineering and management tracking.</p></article>
-          <article class="card lead-item"><div class="skill-icon">✓</div><h3>Quality Strategy</h3><p>Plan regression, integration and system test coverage from product features and use cases.</p></article>
+  <main class="wrap">
+    <section id="leadership" class="reveal">
+      <div class="section-title"><h2>Leadership readiness</h2><p>Ownership, guidance and delivery</p></div>
+      <div class="grid3 stagger">
+        <article class="card hover"><div class="icon">★</div><h3>Technical Leadership</h3><p>Technical leadership, decision-making and test-planning support for system validation programs at Schneider Electric.</p></article>
+        <article class="card hover"><div class="icon">👥</div><h3>Team Guidance</h3><p>Led team members in adapting Python test scripts for new semiconductor products (post-silicon validation, Silana – US).</p></article>
+        <article class="card hover"><div class="icon">⏱</div><h3>Delivery Ownership</h3><p>Owned customer automation projects end to end — objectives, timelines, schedules and on-site issue resolution.</p></article>
+        <article class="card hover"><div class="icon">⚙</div><h3>Framework &amp; Tooling</h3><p>Architect reusable, configurable Python test suites and internal productivity tools the wider team can run.</p></article>
+        <article class="card hover"><div class="icon">✉</div><h3>Stakeholder Communication</h3><p>Mentor engineers, triage failures and keep test status current in Jira for engineering and management tracking.</p></article>
+        <article class="card hover"><div class="icon">✓</div><h3>Quality Strategy</h3><p>Plan regression, integration and system test coverage from product features and use cases.</p></article>
+      </div>
+    </section>
+
+    <section id="skills" class="reveal">
+      <div class="section-title"><h2>Core expertise</h2><p>Technologies and delivery capabilities</p></div>
+      <div class="grid4 stagger">
+        <article class="card hover"><div class="icon">⚙</div><h3>Python Automation</h3><p>Modular test-suite architecture, reusable driver/config layers, multi-threading and multi-processing.</p></article>
+        <article class="card hover"><div class="icon">⇄</div><h3>Device &amp; API Testing</h3><p>Modbus TCP register validation, Redfish/REST API crawling, Playwright and Selenium web automation.</p></article>
+        <article class="card hover"><div class="icon">◉</div><h3>Instrumentation</h3><p>VISA/SCPI electronic loads, Yokogawa WT230 power meter, AC/DC sources, oscilloscopes, NI DAQ, source meters.</p></article>
+        <article class="card hover"><div class="icon">▦</div><h3>Test UI &amp; Reporting</h3><p>NiceGUI, Streamlit and PyQt dashboards with tolerance-based PASS/FAIL results and reports.</p></article>
+        <article class="card hover"><div class="icon">✓</div><h3>Quality Engineering</h3><p>System, integration, regression, functional, HIL/SIL; IEEE 1547, CA Rule 21 and PREPA compliance.</p></article>
+        <article class="card hover"><div class="icon">↔</div><h3>Interfaces</h3><p>MODBUS, CAN, TCP/IP, UDP, RS232, RS485, GPIB, USB HID, ECP-e and SMTP.</p></article>
+        <article class="card hover"><div class="icon">∞</div><h3>Tools &amp; DevOps</h3><p>Git, Jira, Azure DevOps YAML, Shell scripting, Power Automate and Wireshark.</p></article>
+        <article class="card hover"><div class="icon">⌨</div><h3>Also Proficient In</h3><p>LabVIEW, NI TestStand, C#, C++, SQL; Agile / SDLC; Windows and Linux.</p></article>
+      </div>
+    </section>
+
+    <section id="experience" class="reveal">
+      <div class="section-title"><h2>Professional experience</h2><p>Automation, validation and project delivery</p></div>
+      <div class="card timeline">
+        <div class="job">
+          <div class="job-head"><h3>Senior Automation Test Engineer</h3><span class="date">Oct 2022 – Present</span></div>
+          <div class="company">SCHNEIDER ELECTRIC</div>
+          <ul>
+            <li><strong>All-in-One Rack PDU Test Suite (Python + NiceGUI):</strong> architected a single suite that automates complete PDU validation —
+              <ul>
+                <li>Modbus TCP register verification against the register map;</li>
+                <li>Redfish validation with a recursive @odata.id crawler that tolerates malformed JSON and saves per-model URL configurations;</li>
+                <li>Playwright auto-login and data capture across 10+ device web pages;</li>
+                <li>VISA/SCPI control of multiple programmable electronic loads and Yokogawa WT230 power-meter readings;</li>
+                <li>cross-comparison of voltage, current, power and energy with configurable tolerances, live status dashboards and PASS/FAIL reports.</li>
+              </ul>
+            </li>
+            <li>Develop and execute automated system test plans for hybrid inverters, backup controllers, battery management systems and energy monitoring products using Python and programmable lab equipment.</li>
+            <li>Validate grid-tie and grid-forming control modes and verify compliance with IEEE 1547, CA Rule 21 and PREPA requirements.</li>
+            <li>Own regression, integration and system testing, triage failures with cross-functional teams and maintain Jira for stakeholder and management tracking.</li>
+            <li>Built internal team tools — a Streamlit/SQLite competency management app with role-based access and automated email notifications, and a timesheet consolidation utility.</li>
+          </ul>
         </div>
-      </section>
-      <section id="skills" class="reveal">
-        <div class="section-title"><h2>Core expertise</h2><p>Technologies and delivery capabilities</p></div>
-        <div class="skills stagger">
-            <article class="card skill"><div class="skill-icon">⚙</div><h3>Python Automation</h3><p>Modular test-suite architecture, reusable driver/config layers, multi-threading and multi-processing.</p></article>
-            <article class="card skill"><div class="skill-icon">⇄</div><h3>Device &amp; API Testing</h3><p>Modbus TCP register validation, Redfish/REST API crawling, Playwright and Selenium web automation.</p></article>
-            <article class="card skill"><div class="skill-icon">◉</div><h3>Instrumentation</h3><p>VISA/SCPI electronic loads, Yokogawa WT230 power meter, AC/DC sources, oscilloscopes, NI DAQ, source meters.</p></article>
-            <article class="card skill"><div class="skill-icon">▦</div><h3>Test UI &amp; Reporting</h3><p>NiceGUI, Streamlit and PyQt dashboards with tolerance-based PASS/FAIL results and reports.</p></article>
-            <article class="card skill"><div class="skill-icon">✓</div><h3>Quality Engineering</h3><p>System, integration, regression, functional, HIL/SIL; IEEE 1547, CA Rule 21 and PREPA compliance.</p></article>
-            <article class="card skill"><div class="skill-icon">↔</div><h3>Interfaces</h3><p>MODBUS, CAN, TCP/IP, UDP, RS232, RS485, GPIB, USB HID, ECP-e and SMTP.</p></article>
-            <article class="card skill"><div class="skill-icon">∞</div><h3>Tools &amp; DevOps</h3><p>Git, Jira, Azure DevOps YAML, Shell scripting, Power Automate and Wireshark.</p></article>
-            <article class="card skill"><div class="skill-icon">⌨</div><h3>Also Proficient In</h3><p>LabVIEW, NI TestStand, C#, C++, SQL; Agile / SDLC; Windows and Linux.</p></article>
-          </div>
-        </section>
-
-      <section id="experience" class="reveal">
-        <div class="section-title"><h2>Professional experience</h2><p>Automation, validation and project delivery</p></div>
-        <div class="card timeline stagger">
-          <article class="job">
-            <div class="job-head"><div><h3>Senior Automation Test Engineer</h3><div class="company">SCHNEIDER ELECTRIC</div></div><span class="date">Oct 2022 – Present</span></div>
-            <ul>
-              <li><strong>All-in-one Rack PDU Test Suite (Python + NiceGUI):</strong> architected a single suite that automates complete PDU validation —
-                <ul>
-                  <li>Modbus TCP register verification against the register map;</li>
-                  <li>Redfish validation with a recursive @odata.id crawler that tolerates malformed JSON and saves per-model URL configurations;</li>
-                  <li>Playwright auto-login and data capture across 10+ device web pages;</li>
-                  <li>VISA/SCPI control of multiple programmable electronic loads and Yokogawa WT230 power-meter readings;</li>
-                  <li>cross-comparison of voltage, current, power and energy with configurable tolerances, live status dashboards and PASS/FAIL reports.</li>
-                </ul></li>
-              <li>Develop and execute automated system test plans for hybrid inverters, backup controllers, battery management systems and energy monitoring products using Python and programmable lab equipment.</li>
-              <li>Validate grid-tie and grid-forming control modes and verify compliance with IEEE 1547, CA Rule 21 and PREPA requirements.</li>
-              <li>Own regression, integration and system testing, triage failures with cross-functional teams and maintain Jira for stakeholder and management tracking.</li>
-              <li>Built internal team tools — a Streamlit/SQLite competency management app with role-based access and automated email notifications, and a timesheet consolidation utility.</li>
-            </ul>
-          </article>
-          <article class="job">
-            <div class="job-head"><div><h3>Design Engineer 2</h3><div class="company">TESSOLVE SEMICONDUCTOR</div></div><span class="date">Mar 2021 – Oct 2022</span></div>
-            <ul>
-              <li>Led team members in modifying Python test scripts for new products in post-silicon validation for a US semiconductor client.</li>
-              <li>Designed, developed, debugged and maintained automated test and data-acquisition software using LabVIEW, Python, C++, C# and instrumentation interfaces.</li>
-              <li>Partnered with systems engineers, reviewed software modules and resolved test-system issues at customer sites.</li>
-            </ul>
-          </article>
-          <article class="job">
-            <div class="job-head"><div><h3>Project Engineer</h3><div class="company">Nive Systems</div></div><span class="date">Jun 2018 – Feb 2021</span></div>
-            <ul><li>Delivered customer automation projects covering GUI development, data acquisition, hardware integration, debugging and schedule ownership using LabVIEW and Python.</li></ul>
-          </article>
+        <div class="job">
+          <div class="job-head"><h3>Design Engineer 2</h3><span class="date">Mar 2021 – Oct 2022</span></div>
+          <div class="company">TESSOLVE SEMICONDUCTOR</div>
+          <ul>
+            <li>Led team members in modifying Python test scripts for new products in post-silicon validation for a US semiconductor client.</li>
+            <li>Designed, developed, debugged and maintained automated test and data-acquisition software using LabVIEW, Python, C++, C# and instrumentation interfaces.</li>
+            <li>Partnered with systems engineers, reviewed software modules and resolved test-system issues at customer sites.</li>
+          </ul>
         </div>
-      </section>
-
-	<section id="projects" class="reveal">
-	  <div class="section-title">
-		<h2>Projects</h2>
-		<p>Representative automation work</p>
-	  </div>
-
-	  <div class="projects stagger">
-		<article class="card project featured">
-		  <span class="tag">Latest • Flagship</span>
-		  <h3>All-in-One Rack PDU Test Suite</h3>
-		  <p>One Python + NiceGUI suite covering the full PDU validation flow: Modbus TCP register checks, Redfish resource-tree crawling, Playwright web-page verification (10+ pages), electronic-load control over VISA/SCPI and WT230 power-meter comparison — with tolerance-based PASS/FAIL, live dashboards and reports.</p>
-		  <div class="chips"><span>Python</span><span>NiceGUI</span><span>Modbus TCP</span><span>Redfish</span><span>Playwright</span><span>VISA/SCPI</span><span>WT230</span></div>
-		</article>
-		<article class="card project">
-		  <h3>Hybrid Energy Systems Automation</h3>
-		  <p>Developed Python-based automation for system testing of hybrid inverters, backup controllers, battery systems, and energy monitors, including grid-control and regulatory compliance validation.</p>
-		</article>
-
-		<article class="card project">
-		  <h3>EMS</h3>
-		  <p>Developed a LabVIEW-based system for real-time sensor data monitoring, equipment control, data logging, and playback analysis for GTRE (DRDO).</p>
-		</article>
-
-		<article class="card project">
-		  <h3>Post-Silicon Validation</h3>
-		  <p>Led the modification and execution of Python-based automated test scripts for validating new semiconductor products.</p>
-		</article>
-
-		<article class="card project">
-		  <h3>DVT / UPS Validation</h3>
-		  <p>Developed LabVIEW and Python utilities for UPS validation, including lab-equipment automation and HID, ECP-e, and Micro-link protocol analysis.</p>
-		</article>
-
-		<article class="card project">
-		  <h3>Photo Booth</h3>
-		  <p>Developed a Python-based DSLR photo booth application with image capture, filtering, email sharing, printing, and licence-protection features.</p>
-		</article>
-
-		<article class="card project">
-		  <h3>Nala Application</h3>
-		  <p>Developed a LabVIEW-based data-logging and lab-equipment control application for monitoring and validating UPS system operations.</p>
-		</article>
-
-		<article class="card project">
-		  <h3>60 GHz Product Test</h3>
-		  <p>Developed and maintained automated device-variant test sequences using LabVIEW, Python, and TestStand.</p>
-		</article>
-
-		<article class="card project">
-		  <h3>CAIR Drone Control</h3>
-		  <p>Developed a Python-based GUI application for camera sensor-data monitoring and drone operation for DRDO (CAIR).</p>
-		</article>
-
-		<article class="card project">
-		  <h3>Vision Monitoring</h3>
-		  <p>Developed a Python-based video capture, analysis, and device-operation application to support automated product validation.</p>
-		</article>
-	  </div>
-	</section>
-
-
-      <section class="bottom-grid reveal">
-        <div class="card">
-          <div class="section-title"><h2>Education & certification</h2></div>
-          <div class="credential"><div class="badge">BE</div><div><strong>B.E., Electronics & Instrumentation Engineering</strong><span>K S Rangasamy College of Technology • 2014–2018</span></div></div>
-          <div class="credential"><div class="badge">CLD</div><div><strong>Certified LabVIEW Developer</strong><span>National Instruments</span></div></div>
+        <div class="job">
+          <div class="job-head"><h3>Project Engineer</h3><span class="date">Jun 2018 – Feb 2021</span></div>
+          <div class="company">NIVE SYSTEMS</div>
+          <ul>
+            <li>Delivered customer automation projects covering GUI development, data acquisition, hardware integration, debugging and schedule ownership using LabVIEW and Python.</li>
+          </ul>
         </div>
-      </section>
-    </main>
-    <footer>© <span id="year"></span> • Parthiban Selvarasu • Senior Test Automation Engineer</footer>
-  </div>
+      </div>
+    </section>
+
+    <section id="projects" class="reveal">
+      <div class="section-title"><h2>Projects</h2><p>Representative automation work</p></div>
+      <div class="grid3 stagger">
+        <article class="card hover featured">
+          <span class="tag">Latest • Flagship</span>
+          <h3>All-in-One Rack PDU Test Suite</h3>
+          <p>One Python + NiceGUI suite covering the full PDU validation flow: Modbus TCP register checks, Redfish resource-tree crawling, Playwright web-page verification (10+ pages), electronic-load control over VISA/SCPI and WT230 power-meter comparison — with tolerance-based PASS/FAIL, live dashboards and reports.</p>
+          <div class="chips"><span>Python</span><span>NiceGUI</span><span>Modbus TCP</span><span>Redfish</span><span>Playwright</span><span>VISA/SCPI</span><span>WT230</span></div>
+        </article>
+        <article class="card hover"><h3>Hybrid Energy Systems Automation</h3><p>Python-based automation for system testing of hybrid inverters, backup controllers, battery systems and energy monitors, including grid-control and regulatory compliance validation.</p></article>
+        <article class="card hover"><h3>EMS</h3><p>LabVIEW-based system for real-time sensor data monitoring, equipment control, data logging and playback analysis for GTRE (DRDO).</p></article>
+        <article class="card hover"><h3>Post-Silicon Validation</h3><p>Led the modification and execution of Python-based automated test scripts for validating new semiconductor products.</p></article>
+        <article class="card hover"><h3>DVT / UPS Validation</h3><p>LabVIEW and Python utilities for UPS validation, including lab-equipment automation and HID, ECP-e and Micro-link protocol analysis.</p></article>
+        <article class="card hover"><h3>Photo Booth</h3><p>Python-based DSLR photo booth application with image capture, filtering, email sharing, printing and licence protection.</p></article>
+        <article class="card hover"><h3>Nala Application</h3><p>LabVIEW-based data-logging and lab-equipment control application for monitoring and validating UPS system operations.</p></article>
+        <article class="card hover"><h3>60 GHz Product Test</h3><p>Automated device-variant test sequences using LabVIEW, Python and TestStand.</p></article>
+        <article class="card hover"><h3>CAIR Drone Control</h3><p>Python-based GUI application for camera sensor-data monitoring and drone operation for DRDO (CAIR).</p></article>
+        <article class="card hover"><h3>Vision Monitoring</h3><p>Python-based video capture, analysis and device-operation application to support automated product validation.</p></article>
+      </div>
+    </section>
+
+    <section id="education" class="reveal">
+      <div class="section-title"><h2>Education &amp; certification</h2><p>Foundation and credentials</p></div>
+      <div class="edu stagger">
+        <div class="card hover"><div class="badge">BE</div><div><h3>B.E., Electronics &amp; Instrumentation Engineering</h3><p>K S Rangasamy College of Technology • 2014–2018</p></div></div>
+        <div class="card hover"><div class="badge">CLD</div><div><h3>Certified LabVIEW Developer</h3><p>National Instruments</p></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>© <span id="year"></span> • Parthiban Selvarasu • Senior Test Automation Engineer</footer>
 
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('show');
-    }), { threshold: 0.08 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    // stagger delays
-    document.querySelectorAll('.stagger').forEach(g => [...g.children].forEach((c,i) => c.style.transitionDelay = (i*90)+'ms'));
-    // scroll progress
-    const bar = document.getElementById('progress');
-    addEventListener('scroll', () => { const h = document.documentElement; bar.style.width = (h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'; }, {passive:true});
-    // counters
-    document.querySelectorAll('.count').forEach(el => { const to=+el.dataset.to; let n=0; const t=setInterval(()=>{ el.textContent=++n; if(n>=to) clearInterval(t); }, 1100/to); });
-    // typing effect
-    const ty=document.querySelector('.typed');
-    if (ty) { const words=ty.dataset.words.split('|'); let w=0,i=0,del=false;
-      (function tick(){ const word=words[w]; ty.textContent=word.slice(0,i);
-        if(!del && i<word.length){ i++; setTimeout(tick,70); }
-        else if(!del){ del=true; setTimeout(tick,1600); }
-        else if(i>0){ i--; setTimeout(tick,35); }
-        else { del=false; w=(w+1)%words.length; setTimeout(tick,300); } })(); }
+    (function () {
+      // Enable scroll animations only when JS runs (content stays visible if JS is blocked)
+      document.documentElement.classList.add('js');
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Stagger delays for card groups
+      document.querySelectorAll('.stagger').forEach(function (g) {
+        Array.prototype.forEach.call(g.children, function (c, i) { c.style.transitionDelay = (i * 90) + 'ms'; });
+      });
+
+      // Reveal on scroll
+      var targets = document.querySelectorAll('.reveal, .stagger, .timeline');
+      function showAll() { targets.forEach(function (el) { el.classList.add('show'); }); }
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); } });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        targets.forEach(function (el) { io.observe(el); });
+      } else { showAll(); }
+      // Safety net: never leave content hidden
+      setTimeout(showAll, 4000);
+
+      // Scroll progress bar
+      var bar = document.getElementById('progress');
+      window.addEventListener('scroll', function () {
+        var h = document.documentElement, max = h.scrollHeight - h.clientHeight;
+        bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+      }, { passive: true });
+
+      // Counters (8+, 3)
+      document.querySelectorAll('.count').forEach(function (el) {
+        var to = +el.dataset.to, n = 0; el.textContent = '0';
+        var t = setInterval(function () { el.textContent = ++n; if (n >= to) clearInterval(t); }, 1100 / to);
+      });
+
+      // Typing effect
+      var ty = document.querySelector('.typed');
+      if (ty) {
+        var words = ty.dataset.words.split('|'), w = 0, i = 0, del = false;
+        (function tick() {
+          var word = words[w]; ty.textContent = word.slice(0, i);
+          if (!del && i < word.length) { i++; setTimeout(tick, 70); }
+          else if (!del) { del = true; setTimeout(tick, 1600); }
+          else if (i > 0) { i--; setTimeout(tick, 35); }
+          else { del = false; w = (w + 1) % words.length; setTimeout(tick, 300); }
+        })();
+      }
+    })();
   </script>
 </body>
 </html>
